@@ -8,3 +8,5 @@ Language: en_us
 
 Party:
   maxSize: 6
+  # The amount of time to wait for a player to be offline before they get removed from the party
+  offlineTimeoutMinutes: 1

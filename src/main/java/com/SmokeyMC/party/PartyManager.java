@@ -8,6 +8,7 @@ import java.util.*;
 public class PartyManager {
     private final Map<UUID, Party> playerParty = new HashMap<>();
     private final Set<UUID> partyChatToggled = new HashSet<>();
+    private final Map<UUID, Long> lastSeenOffline = new HashMap<>();
     private final Main plugin;
 
     public PartyManager(Main plugin) {
@@ -67,6 +68,45 @@ public class PartyManager {
             //inviteePlayer.sendMessage(plugin.getLanguageManager().getMessage("party.invite.decline", "command", "/party disband"));
         }
 
+    }
+
+    public void trackPlayerOffline(UUID playerID){
+        if(getParty(playerID) != null){
+            lastSeenOffline.put(playerID, System.currentTimeMillis());
+        }
+    }
+
+    public void cleanupOfflineMembers() {
+        long now = System.currentTimeMillis();
+        plugin.debug("PartyManager: Cleanup: Now is " + now);
+        long timeoutMillis = plugin.getConfig().getLong("Party.offlineTimeoutMinutes") * 1000L * 60L;
+        plugin.debug("PartyManager: Cleanup: Timeout is " + timeoutMillis + "ms");
+        Iterator<Map.Entry<UUID, Long>> iterator = lastSeenOffline.entrySet().iterator();
+
+        while (iterator.hasNext()) {
+            plugin.debug("PartyManager: Cleanup: Checking entry " + iterator.next());
+            Map.Entry<UUID, Long> entry = iterator.next();
+            plugin.debug("PartyManager: Cleanup: Checking entry " + entry.getKey() + " with value " + entry.getValue());
+            UUID playerID = entry.getKey();
+            plugin.debug("PartyManager: Cleanup: Checking entry " + playerID);
+            Long offlineTime = entry.getValue();
+            plugin.debug("PartyManager: Cleanup: Checking entry " + offlineTime);
+
+            plugin.debug("PartyManager: Cleanup: Checking entry " + playerID + " with value " + offlineTime + " against now " + now);
+            plugin.debug("now - offlinetime: " + (now - offlineTime) + " timeoutMillis: " + timeoutMillis + "");
+            if (now - offlineTime >= timeoutMillis) {
+                Party party = getParty(playerID);
+                if (party != null) {
+                    plugin.debug("PartyManager: Cleanup: Player " + playerID + " was offline for " + (now - offlineTime) + "ms, removing from party");
+                    leaveParty(playerID); //Will run the logic for if its the leader will auto promote a new player
+                }
+                iterator.remove();  //Clean up the LastSeenOffline map
+            }
+        }
+    }
+
+    public void clearOfflineTrack(UUID playerID){
+        lastSeenOffline.remove(playerID);
     }
 
     public void joinParty(UUID playerId, UUID targetParty) {

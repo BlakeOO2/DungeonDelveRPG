@@ -2,10 +2,7 @@ package com.SmokeyMC;
 
 import com.SmokeyMC.AdminCommands.gamemode;
 import com.SmokeyMC.language.LanguageManager;
-import com.SmokeyMC.party.PartyChatCommand;
-import com.SmokeyMC.party.PartyChatListener;
-import com.SmokeyMC.party.PartyCommands;
-import com.SmokeyMC.party.PartyManager;
+import com.SmokeyMC.party.*;
 import org.bukkit.plugin.java.JavaPlugin;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -24,6 +21,7 @@ public class Main extends JavaPlugin {
         partyManager = new PartyManager(this);
         RegisterCommands();
         RegisterListeners();
+        clearnUpOfflinePartyMembers();
     }
 
     public void onDisable(){
@@ -43,6 +41,7 @@ public class Main extends JavaPlugin {
 
     public void RegisterListeners(){
         getServer().getPluginManager().registerEvents(new PartyChatListener(this), this);
+        getServer().getPluginManager().registerEvents(new PartyActivicyListener(this), this);
     }
 
 
@@ -62,6 +61,12 @@ public class Main extends JavaPlugin {
 
     public int getMaxPartySize(){
         return getConfig().getInt("Party.maxsize", 6);
+    }
+
+    private void clearnUpOfflinePartyMembers(){
+        getServer().getScheduler().runTaskTimer(this, () -> {
+            getPartyManager().cleanupOfflineMembers();
+        }, 20L * 60, 20L * 60);
     }
 
 }

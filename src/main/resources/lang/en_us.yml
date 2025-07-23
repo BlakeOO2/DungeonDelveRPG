@@ -52,6 +52,8 @@ party:
     new_leader: "&4 {player} is now the party leader."
     you_leader_left_party: "&cYou have left the party, the new leader is {target}"
     leader_left_disbanded_party: "&cYou have left the party, and the party has been disbanded."
+    rejoined_party: "&e{player} has rejoined the party. And is no longer offline."
+    player_has_gone_offline: "&e{player} has gone offline. They {timeLeft} minute(s) to rejoin before getting removed from the party."
 
   promote:
     no_party: "&cYou must be in a party to use this command"

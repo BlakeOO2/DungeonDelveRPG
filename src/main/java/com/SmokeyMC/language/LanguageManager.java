@@ -68,8 +68,8 @@ public class LanguageManager {
     public String getMessage(String key, String... placeholders) {
         // Try to get message from current language
 
-        plugin.debug("Key: " + key);
-        plugin.debug("Placeholders: " + joinPlaceholders(placeholders) );
+        //plugin.debug("Key: " + key);
+        //plugin.debug("Placeholders: " + joinPlaceholders(placeholders) );
         //plugin.debug("Current Language: " + );
 
         FileConfiguration currentLangFile = languageFiles.get(currentLanguage);
@@ -93,7 +93,7 @@ public class LanguageManager {
         }
 
         // Replace placeholders if any
-        plugin.debug("Message before replacement: " + message);
+        //plugin.debug("Message before replacement: " + message);
         if (placeholders.length > 0) {
             for (int i = 0; i < placeholders.length; i += 2) {
                 if (i + 1 < placeholders.length) {
@@ -104,7 +104,7 @@ public class LanguageManager {
                 }
             }
         }
-        plugin.debug("Message after replacement: " + message);
+        //plugin.debug("Message after replacement: " + message);
 
         // Convert color codes
         return message.replace("&", "§");

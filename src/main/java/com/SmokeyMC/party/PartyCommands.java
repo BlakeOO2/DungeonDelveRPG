@@ -1,6 +1,7 @@
 package com.SmokeyMC.party;
 
 import com.SmokeyMC.Main;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -82,7 +83,10 @@ public class PartyCommands implements CommandExecutor {
                             //This is where it would look for the party leader, if it is true it will skip this
                             //Changed how it got done because it would paste the leader in a random order, now it will do
                             // it at the top
-                        } else {
+                        } else if(name.equals("Unknown")) {
+                            String OfflineName = player.getServer().getOfflinePlayer(memberId).getName();
+                            player.sendMessage(("§7- §f" + OfflineName + " §7(OFFLINE)"));
+                        }else {
                             player.sendMessage("§7- §f" + name);
                         }
                     }
