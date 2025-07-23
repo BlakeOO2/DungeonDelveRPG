@@ -1,0 +1,10 @@
+# This is the start of the config file, I will do my best to explain what each config option does
+
+#Turn this on or off, If it is on it will give plenty of extra information into the console to help to debug some issues
+debug: true
+
+# Right now the only option for this is en_us but will have the ability to add other languages in the future
+Language: en_us
+
+Party:
+  maxSize: 6

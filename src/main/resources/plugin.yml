@@ -1,0 +1,38 @@
+name: DungeonDelveRPG
+main: com.SmokeyMC.Main
+version: '${project.version}'
+api-version: 1.21
+authors:
+  - Blakeoo2
+description: The main Plugin for DDRPG
+
+permissions:
+  DDRPG.Admin.gamemode.*:
+    default: op
+    description: Allows the user to change to all gamemodes
+
+  DDRPG.Admin.gamemode.Survival:
+    default: op
+    description: Allows the user to change to survival
+
+  DDRPG.Admin.gamemode.Creative:
+    default: op
+    description: Allows the user to change to creative
+
+  DDRPG.Admin.gamemode.Spectator:
+    default: op
+    description: Allows the user to change to spectator
+
+  DDRPG.Admin.gamemode.others:
+    default: op
+    description: Allows the user to change the gamemode of others
+
+commands:
+  party:
+    description: Main Party Command
+    usage: /Party <subcommand>
+    aliases:
+      - p
+  pc:
+    description: Short cut for the party chat command
+    Usage: /pc <message> or /pc

@@ -1,0 +1,88 @@
+
+# English (US) language file for DDRPG plugin
+
+
+# General messages
+prefix: "&6[DDRPG] &r"
+no_permission: "&cYou don't have permission to use this command."
+player_only: "This command can only be used by players."
+
+
+# Party messages:
+party:
+  help:
+    help: "&e/party help &b - Prints this help message."
+    create: "&e/party create &b - Creates a party to be able to invite players."
+    invite: "&e/party invite <username> &b - Invites the player to your party."
+    leave: "&e/party leave &b - Leaves the current party."
+    list: "&e/party list &b - Lists the members of your party."
+    promote: "&e/party promote <username> &b - Promote the player to the party leader."
+    kick: "&e/party kick <username> &b - Kicks the player form the party."
+    accept: "&e/party accept <username> &b - Accept a party invite from the player."
+    disband: "&e/party disband &b - Disbands the party."
+    chat: "&e/party chat &b toggles party chat"
+
+  invite:
+    sent: "&eYou have invited {target} to your party!"
+    no_party: "&cYou are not in a party."
+    already_in_party: "&cThat player is already in a party."
+    already_invited: "&cThat player has already been invited."
+    from: "&dYou have been invite to a party by &e{inviter}"
+    accept: "&eType &a/party accept {inviter} to &eto join."
+
+  join:
+    already_in_party: "&cYou are already in a party"
+    joinedParty: "&aYou joined the party!"
+    another_join_party: "&a{player} has joined the party"
+    not_invited: "&cYou do not have an invite from this player's party, or the party has been disbanded."
+
+  list:
+    no_party: "&cYou are not in a party."
+    top_of_party_member_list: "§e--- Party Members ---"
+    leader: "&d[Leader] &f{player}"
+
+  leave:
+    no_party: "&cYou are not in a party."
+    not_in_party: "&cYou are not in a party to be able to leave."
+    disbanded_leader_left: "&cThe party has been disbanded because the leader left."
+    player_left_party: "&e {player} has left the party."
+    you_left_party: "&e You have left the party."
+    new_leader: "&4 {player} is now the party leader."
+    you_leader_left_party: "&cYou have left the party, the new leader is {target}"
+    leader_left_disbanded_party: "&cYou have left the party, and the party has been disbanded."
+
+  promote:
+    no_party: "&cYou must be in a party to use this command"
+    not_leader: "&cOnly the party leader can promote members"
+    not_in_party: "&cThat player is not in your party."
+    same_player: "&cYou are already the leader."
+    player_promoted: "&6{player} is now the party leader."
+    not_online: "&cThat player is not online."
+
+  usage:
+    promote: "&cUsage: /party promote <player>"
+    kick: "&cUsage: /party kick <player>"
+    invite: "&cUsage: /party invite <player>"
+
+  kick:
+    no_party:  "&cYou are not in a party."
+    not_leader: "&cOnly the party leader can kick members."
+    not_in_party: "&cThat player is not in your party."
+    kick_self: "&cYou cannot kick yourself. Use /party leave instead."
+    player_kicked_self: "&cYou have been kicked from the party!"
+    player_kicked: "&c{player} has been kicked from the party!"
+    not_online: "&cThat player is not online."
+
+  disband:
+    no_party: "&cYou are not in a party."
+    not_leader: "&cOnly the party leader can disband the party."
+    party_disbanded: "&cThe party has been disbanded by the leader."
+
+  chat:
+    toggled_off: "&7Party chat &coff&7."
+    toggled_on: "&7Party chat &aon&7."
+    no_party: "&cYou are not in a party."
+    message: "&b[Party] &f{player}: {message}"
+
+  create:
+    created_party: "&aYou have created a party"
