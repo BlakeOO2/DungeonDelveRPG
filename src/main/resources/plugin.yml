@@ -27,6 +27,10 @@ permissions:
     default: op
     description: Allows the user to change the gamemode of others
 
+  DDRPG.party.bypass.maxSize:
+    default: op
+    description: Allows the user to join parties even if they are full
+
 commands:
   party:
     description: Main Party Command

@@ -41,6 +41,17 @@ public class PartyManager {
             plugin.getServer().getPlayer(invitee).sendMessage(plugin.getLanguageManager().getMessage("party.invite.already_in_party"));
             return;
         }
+        //Check to see if the party is full before sending the invite, gets the number from the config
+        if (party.getMembers().size() >= plugin.getConfig().getInt("Party.maxSize")) {
+            Player inviterPlayer = plugin.getServer().getPlayer(inviter);
+
+            if (inviterPlayer != null && inviterPlayer.hasPermission("DDRPG.party.bypass.maxSize:")) {
+                plugin.getServer().getPlayer(inviter).sendMessage(plugin.getLanguageManager().getMessage("party.invite.party_full", "max_size", plugin.getConfig().getInt("Party.maxSize") + ""));
+                return;
+
+            }
+
+        }
 
         if (party.getInvited().contains(invitee)) {
             plugin.getServer().getPlayer(invitee).sendMessage(plugin.getLanguageManager().getMessage("party.invite.already_invited"));
@@ -60,9 +71,22 @@ public class PartyManager {
 
     public void joinParty(UUID playerId, UUID targetParty) {
         //Check to see if the Player is in a party or not
+        Party party = getParty(targetParty);
+
         if (playerParty.containsKey(playerId)) {
             plugin.getServer().getPlayer(playerId).sendMessage(plugin.getLanguageManager().getMessage("party.join.already_in_party"));
             return;
+        }
+
+        //Checks the size of the party before allowing the player to join, if it is greater then the max size it stop the joining event
+        if(party.getMembers().size() >= plugin.getConfig().getInt("Party.maxSize")){
+            Player joiningPlayer = plugin.getServer().getPlayer(playerId);
+
+            //Check to see if the player is valid or has the bypass max size permission, if not then send a message to the player
+            if(joiningPlayer != null && joiningPlayer.hasPermission("DDRPG.party.bypass.maxSize:")){
+                plugin.getServer().getPlayer(targetParty).sendMessage(plugin.getLanguageManager().getMessage("party.join.party_full", "max_size", plugin.getConfig().getInt("Party.maxSize") + ""));
+
+            }
         }
 
         if (getParty(targetParty).getInvited().contains(playerId)) {

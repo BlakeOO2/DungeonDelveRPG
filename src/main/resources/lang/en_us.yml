@@ -29,12 +29,14 @@ party:
     already_invited: "&cThat player has already been invited."
     from: "&dYou have been invite to a party by &e{inviter}"
     accept: "&eType &a/party accept {inviter} to &eto join."
+    party_full: "&cThe party is full, you cannot invite more people. Max size is {max_size}"
 
   join:
     already_in_party: "&cYou are already in a party"
     joinedParty: "&aYou joined the party!"
     another_join_party: "&a{player} has joined the party"
     not_invited: "&cYou do not have an invite from this player's party, or the party has been disbanded."
+    party_full: "&cThe party you are trying to join is full. Max size is {max_size}."
 
   list:
     no_party: "&cYou are not in a party."
