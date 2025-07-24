@@ -90,3 +90,7 @@ party:
 
   create:
     created_party: "&aYou have created a party"
+
+dungeon:
+  fire_dungeon:
+    name: "🔥 Fire Dungeon"

@@ -26,6 +26,11 @@
             <id>spigot-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
+        <!--world edit repo-->
+        <repository>
+            <id>enginehub</id>
+            <url>https://maven.enginehub.org/repo/</url>
+        </repository>
     </repositories>
 
 
@@ -35,6 +40,13 @@
             <groupId>io.papermc.paper</groupId>
             <artifactId>paper-api</artifactId>
             <version>1.21.7-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sk89q.worldedit</groupId>
+            <artifactId>worldedit-bukkit</artifactId>
+            <version>7.2.15</version> <!-- or latest -->
             <scope>provided</scope>
         </dependency>
 
@@ -132,6 +144,10 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
+
+                <excludes>
+                    <exclude>**/*.schem</exclude>
+                </excludes>
             </resource>
         </resources>
     </build>

@@ -1,9 +1,15 @@
 package com.SmokeyMC;
 
 import com.SmokeyMC.AdminCommands.gamemode;
+import com.SmokeyMC.dungeon.Dungeon;
+import com.SmokeyMC.dungeon.DungeonMaps.FireDungeon;
 import com.SmokeyMC.language.LanguageManager;
 import com.SmokeyMC.party.*;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.io.File;
+import java.util.List;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -11,6 +17,7 @@ public class Main extends JavaPlugin {
     private static Main instance;
     private LanguageManager languageManager;
     private PartyManager partyManager;
+    private List<Dungeon> registeredDungeons;
 
 
     public void onEnable(){
@@ -22,6 +29,11 @@ public class Main extends JavaPlugin {
         RegisterCommands();
         RegisterListeners();
         clearnUpOfflinePartyMembers();
+        registeredDungeons = List.of(
+                new FireDungeon(this)
+        );
+
+
     }
 
     public void onDisable(){
@@ -37,6 +49,18 @@ public class Main extends JavaPlugin {
         //getCommand("gamemode").setExecutor(new gamemode(this));
         getCommand("party").setExecutor(new PartyCommands(this));
         getCommand("pc").setExecutor(new PartyChatCommand(this));
+
+        getCommand("startdungeon").setExecutor((sender, command, label, args) -> {
+            if (!(sender instanceof Player player)) return true;
+            registeredDungeons.get(0).startInstance(player); // For example
+            return true;
+        });
+
+        getCommand("enddungeon").setExecutor((sender, command, label, args) -> {
+            if (!(sender instanceof Player player)) return true;
+            registeredDungeons.get(0).endInstance(player.getUniqueId());
+            return true;
+        });
     }
 
     public void RegisterListeners(){
@@ -47,7 +71,7 @@ public class Main extends JavaPlugin {
 
     public void debug(String message){
         if(getConfig().getBoolean("debug")){
-            getLogger().info(message);
+            getLogger().info("[DEBUG] "+message);
         }
     }
 
@@ -68,5 +92,7 @@ public class Main extends JavaPlugin {
             getPartyManager().cleanupOfflineMembers();
         }, 20L * 60, 20L * 60);
     }
+
+
 
 }

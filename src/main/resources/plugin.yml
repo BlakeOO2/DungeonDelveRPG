@@ -1,6 +1,7 @@
 name: DungeonDelveRPG
 main: com.SmokeyMC.Main
 version: '${project.version}'
+depend: [WorldEdit]
 api-version: 1.21
 authors:
   - Blakeoo2
@@ -40,3 +41,8 @@ commands:
   pc:
     description: Short cut for the party chat command
     Usage: /pc <message> or /pc
+
+  startdungeon:
+    description: Start your own dungeon instance
+  enddungeon:
+    description: End your dungeon instance
